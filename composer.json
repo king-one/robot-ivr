@@ -1,59 +1,69 @@
 {
-  "name": "laravel/lumen",
-  "description": "The Laravel Lumen Framework.",
-  "keywords": [
-    "framework",
-    "laravel",
-    "lumen"
-  ],
-  "license": "MIT",
+  "name": "swoft/swoft",
   "type": "project",
+  "keywords": [
+    "php",
+    "swoole",
+    "swoft"
+  ],
+  "description": "Modern High performance AOP and Coroutine PHP Framework",
+  "license": "Apache-2.0",
   "require": {
-    "php": ">=7.1.3",
-    "babenkoivan/scout-elasticsearch-driver": "^3.10",
-    "barryvdh/laravel-cors": "^0.11.3",
-    "enqueue/amqp-lib": "^0.9.8",
-    "illuminate/redis": "^5.8",
-    "laravel/lumen-framework": "5.8.*",
-    "league/flysystem": "^1.0",
-    "league/fractal": "^0.18.0",
-    "nesbot/carbon": "^2.19",
-    "prettus/l5-repository": "^2.6",
-    "symfony/http-foundation": "^4.3",
-    "vlucas/phpdotenv": "^3.3",
-    "xskit/passport-client": "^2.0",
-    "ext-json": "*"
+    "php": ">7.1",
+    "ext-pdo": "*",
+    "ext-redis": "*",
+    "ext-json": "*",
+    "ext-simplexml": "*",
+    "ext-libxml": "*",
+    "ext-mbstring": "*",
+    "swoft/db": "~2.0.0",
+    "swoft/i18n": "~2.0.0",
+    "swoft/view": "~2.0.0",
+    "swoft/task": "~2.0.0",
+    "swoft/redis": "~2.0.0",
+    "swoft/framework": "~2.0.0",
+    "swoft/http-server": "~2.0.0",
+    "swoft/rpc-client": "~2.0.0",
+    "swoft/rpc-server": "~2.0.0",
+    "swoft/websocket-server": "~2.0.0",
+    "swoft/tcp-server": "~2.0.0",
+    "swoft/process": "~2.0.0",
+    "swoft/apollo": "~2.0.0",
+    "swoft/consul": "~2.0.0",
+    "swoft/limiter": "~2.0.0",
+    "swoft/breaker": "~2.0.0",
+    "swoft/crontab": "~2.0.0",
+    "swoft/session": "~2.0.0",
+    "swoft/devtool": "~2.0.0"
   },
   "require-dev": {
-    "barryvdh/laravel-ide-helper": "^2.6",
-    "fzaninotto/faker": "^1.4",
-    "mockery/mockery": "^1.0",
-    "phpunit/phpunit": "^7.0"
+    "swoft/swoole-ide-helper": "dev-master",
+    "phpunit/phpunit": "^7.5"
   },
   "autoload": {
-    "classmap": [
-      "database/seeds",
-      "database/factories"
-    ],
     "psr-4": {
-      "App\\": "app/"
-    }
+      "App\\": "app/",
+      "Database\\": "database/"
+    },
+    "files": [
+      "app/Helper/Functions.php"
+    ]
   },
   "autoload-dev": {
-    "classmap": [
-      "tests/"
-    ]
+    "psr-4": {
+      "AppTest\\Testing\\": "test/testing",
+      "AppTest\\Unit\\": "test/unit"
+    }
   },
   "scripts": {
     "post-root-package-install": [
       "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-    ]
-  },
-  "config": {
-    "preferred-install": "dist",
-    "sort-packages": true,
-    "optimize-autoloader": true
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    ],
+    "test": [
+      "./vendor/bin/phpstan analyze",
+      "./vendor/bin/phpunit -c phpunit.xml"
+    ],
+    "cs-fix": "./bin/php-cs-fixer fix --dry-run --diff --diff-format=udiff",
+    "do-cs-fix": "./bin/php-cs-fixer fix"
+  }
 }
